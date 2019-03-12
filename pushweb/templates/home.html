@@ -27,5 +27,35 @@
 
 <script src="{% static '/js/registerSw.js' %}"></script>
 <script src="{% static '/js/site.js' %}"></script>
+
+<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyArYkV9xEql6-j7IYVBYTTavn3xiDm9clE",
+    authDomain: "division-regional-rd.firebaseapp.com",
+    databaseURL: "https://division-regional-rd.firebaseio.com",
+    projectId: "division-regional-rd",
+    storageBucket: "division-regional-rd.appspot.com",
+    messagingSenderId: "788802536004"
+  };
+
+  firebase.initializeApp(config);
+  
+  console.log('------------------------');
+  var ref = firebase.database().ref('/region/');
+  ref.once('value').then(function(snapshot) {
+    console.log(snapshot.exists())
+    console.log(snapshot.val())
+  });
+  console.log('------------------------');
+  firebase.firestore().collection('regiones').get().then((regiones) => {
+    regiones.forEach((region) => {
+        console.log(region.data());
+    });
+  });
+
+  
+</script>
 </body>
 </html>
